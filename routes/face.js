@@ -5,8 +5,6 @@ var config = require('../config/config.json');
 
 router.post('/detect', function(req, res, next) {
 
-  console.log(config.api_key);
-  console.log(config.api_secret);
   console.log(req.body);
 
   var options = {
@@ -19,15 +17,16 @@ router.post('/detect', function(req, res, next) {
       },
       json: true // Automatically parses the JSON string in the response
   };
+
   rp(options)
   .then(function(response) {
-    response.on('data', function(data) {
-      // compressed data as it is received
-      console.log('received ' + data.length + ' bytes of compressed data')
-    })
+    res.send(response);
   })
   .catch(function (err) {
-      // POST failed...
+      // console.log(err);
+      console.log(err.statusCode)
+      console.log(err.body.error_message)
+      res.send(err.body.error_message);
   });
 });
 
@@ -46,13 +45,13 @@ router.post('/faceset/create', function(req, res, next) {
   };
   rp(options)
   .then(function(response) {
-    response.on('data', function(data) {
-      // compressed data as it is received
-      console.log('received ' + data.length + ' bytes of compressed data')
-    })
+    res.send(response);
   })
   .catch(function (err) {
-      // POST failed...
+      // console.log(err);
+      console.log(err.statusCode)
+      console.log(err.body.error_message)
+      res.send(err.body.error_message);
   });
 });
 
@@ -71,14 +70,14 @@ router.post('/faceset/addface', function(req, res, next) {
     };
     rp(options)
     .then(function(response) {
-      response.on('data', function(data) {
-        // compressed data as it is received
-        console.log('received ' + data.length + ' bytes of compressed data')
-      })
-    })
-    .catch(function (err) {
-        // POST failed...
-    });
+    res.send(response);
+  })
+  .catch(function (err) {
+      // console.log(err);
+      console.log(err.statusCode)
+      console.log(err.body.error_message)
+      res.send(err.body.error_message);
+  });
 });
 
 router.post('/search', function(req, res, next) {
@@ -96,13 +95,13 @@ router.post('/search', function(req, res, next) {
   };
   rp(options)
   .then(function(response) {
-    response.on('data', function(data) {
-      // compressed data as it is received
-      console.log('received ' + data.length + ' bytes of compressed data')
-    })
+    res.send(response);
   })
   .catch(function (err) {
-      // POST failed...
+      // console.log(err);
+      console.log(err.statusCode)
+      console.log(err.body.error_message)
+      res.send(err.body.error_message);
   });
 });
 
